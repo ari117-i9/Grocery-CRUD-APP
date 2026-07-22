@@ -52,6 +52,20 @@ app.put('/inventory/:id', async(req, res)=>{
         console.log(error.message);
         res.status(500).json({message: error.message})
     }
+});
+
+app.delete('/inventory/:id', async(req, res) =>{
+    try {
+        const {id} = req.params
+        const product = await Product.findByIdAndDelete(id, req.body)
+        if(!product){
+            return res.status(400).json({message: `cannot find product with ID:${id}`})
+        }
+        res.status(200).json();
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({message: error.message})
+    }
 })
 
 
