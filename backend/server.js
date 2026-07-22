@@ -39,6 +39,21 @@ app.post('/inventory', async(req, res)=>{
     }
 })
 
+app.put('/inventory/:id', async(req, res)=>{
+    try {
+        const {id} = req.params
+        const product = await Product.findByIdAndUpdate(id, req.body)
+        if(!product){
+            return res.status(400).json({message: `cannot find product with ID:${id}`})
+        }
+        const updatedProduct = await Product.findById(id)
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({message: error.message})
+    }
+})
+
 
 mongoose.
 connect('mongodb+srv://admin:%40dmin4321@cluster0.c23zfgi.mongodb.net/Inventory?appName=Cluster0')
