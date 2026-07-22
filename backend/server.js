@@ -1,9 +1,13 @@
 const dns = require('node:dns');
 dns.setServers(['8.8.8.8', '1.1.1.1'])
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const Product = require('./models/productModel')
 const app = express()
+
+const MONGO_URL = process.env.MONGO_URL
+const PORT = process.env.PORT
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -71,11 +75,11 @@ app.delete('/inventory/:id', async(req, res) =>{
 
 
 mongoose.
-connect('mongodb+srv://admin:%40dmin4321@cluster0.c23zfgi.mongodb.net/Inventory?appName=Cluster0')
+connect(MONGO_URL)
 .then(()=>{
     console.log('connected to mongoDB')
-    app.listen(3000, ()=>{
-    console.log('Inventory App is running on port 3000')
+    app.listen(PORT, ()=>{
+    console.log(`Inventory App is running on port 3000 ${PORT}`)
     })
 }).catch((err)=>{
     console.log(err)
