@@ -15,11 +15,7 @@ const schema = mongoose.Schema({
         type: Number,
         required: true,
         default: 0.00
-    },
-    image:{
-        type: String,
-        required: false
-    },
+    }
     
 },
     {
