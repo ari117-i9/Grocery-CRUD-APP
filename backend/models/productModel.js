@@ -1,4 +1,3 @@
-const { Double, Int32, Timestamp } = require('mongodb')
 const mongoose = require('mongoose')
 
 const schema = mongoose.Schema({
@@ -8,12 +7,12 @@ const schema = mongoose.Schema({
         required: [true, 'Please enter product name.']
     },
     quantity:{
-        type: Int32,
+        type: Number,
         required: true,
         default: 0
     },
     price:{
-        type: Double,
+        type: Number,
         required: true,
         default: 0.00
     },
@@ -21,8 +20,12 @@ const schema = mongoose.Schema({
         type: String,
         required: false
     },
-    timestamps: true
-})
+    
+},
+    {
+        timestamps: true
+    }
+);
 
 const Product = mongoose.model('Product', schema);
 module.exports = Product;
