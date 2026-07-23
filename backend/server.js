@@ -6,14 +6,22 @@ const mongoose = require('mongoose')
 const inventoryRoute = require('./routes/inventoryRoute')
 const app = express()
 const errorMiddleware = require('./middleware/errorMiddleware')
+const cors = requir('cors')
 
 const MONGO_URL = process.env.MONGO_URL
 const PORT = process.env.PORT
+const FRONTEND = process.env.FRONTEND
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use('/api/inventory', inventoryRoute)
 app.use(errorMiddleware)
+app.use(cors(corsOptions))
+
+var corsOptions = {
+  origin: FRONTEND,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 mongoose.
 connect(MONGO_URL)
