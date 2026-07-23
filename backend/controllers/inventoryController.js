@@ -1,64 +1,70 @@
 const Product = require("../models/productModel")
+const asyncHandler = require('express-async-handler')
 
-const getInventory = async(req, res)=>{
+const getInventory = asyncHandler(async(req, res)=>{
     try {
         const products = await Product.find({})
         res.status(200).json(products)  
     } catch (error) {
-        res.status(500).json({message: error.message})
+        res.status(500)
+        throw new Error(error.message)
         
     }
-}
+})
 
-const getProduct = async(req, res)=>{
+const getProduct = asyncHandler(async(req, res)=>{
     try {
         const {id} = req.params
         const inventory = await Product.findById(id)
         res.status(200).json(inventory)  
     } catch (error) {
-        res.status(500).json({message: error.message})
+        res.status(500)
+        throw new Error(error.message)
+        
         
     }
-}
+})
 
-const addInventory = async(req, res)=>{
+const addInventory = asyncHandler(async(req, res)=>{
     try {
         const product = await Product.create(req.body)
         res.status(200).json(product);
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message: error.message})
+        res.status(500)
+        throw new Error(error.message)
     }
-}
+})
 
-const updateInventory = async(req, res)=>{
+const updateInventory = asyncHandler(async(req, res)=>{
     try {
         const {id} = req.params
         const product = await Product.findByIdAndUpdate(id, req.body)
         if(!product){
-            return res.status(400).json({message: `cannot find product with ID:${id}`})
+            res.status(404);
+            throw new Error(`cannot find product with ID:${id}`)
         }
         const updatedProduct = await Product.findById(id)
         res.status(200).json(updatedProduct);
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message: error.message})
+        res.status(500)
+        throw new Error(error.message)
     }
-}
+})
 
-const deleteInventory = async(req, res) =>{
+const deleteInventory = asyncHandler(async(req, res) =>{
     try {
         const {id} = req.params
         const product = await Product.findByIdAndDelete(id, req.body)
         if(!product){
-            return res.status(400).json({message: `cannot find product with ID:${id}`})
+            res.status(404);
+            throw new Error(`cannot find product with ID:${id}`)
         }
         res.status(200).json();
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message: error.message})
+        res.status(500)
+        throw new Error(error.message)
     }
-}
+})
 
 module.exports = {
     getInventory, getProduct, addInventory, updateInventory, deleteInventory
