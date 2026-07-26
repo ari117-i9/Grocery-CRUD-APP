@@ -1,5 +1,4 @@
 import axios from "axios"
-import e from "cors"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast, ToastContainer } from "react-toastify"
@@ -10,9 +9,9 @@ const Add = () => {
     const [price, setPrice] = useState("")
     const [image, setImage] = useState("")
     const [isLoading, setIsLoading] =useState(false)
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
-    const SubmitAddition = async(e) => {
+    const SubmitAddition = async() => {
         e.preventDefault()
         if(name === "" || quantity === "" || price === "" || image === "" ){
             alert('Error. Please fill in incomplete sections.')
@@ -64,3 +63,5 @@ const Add = () => {
         </div>
     )
 }
+
+export default Add

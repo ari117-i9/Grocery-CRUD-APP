@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import Product from "../components/Product"
 import { VITE_BACKEND_URL } from "../App"
+import { Link } from 'react-router-dom'
+
 const Home = () => {
     const [inventory, setInventory] = useState([])
     const [isLoading, setIsLoading] = useState(false)
