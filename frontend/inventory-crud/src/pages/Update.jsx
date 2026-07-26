@@ -15,7 +15,7 @@ const Update = async() => {
         image:""
     })
 
-    const getProduct = () => {
+    const getProduct = async() => {
         setIsLoading(true)
         try {
             const response = await axios.get(`${VITE_BACKEND_URL}/api/inventory/${id}`)
@@ -90,3 +90,5 @@ const Update = async() => {
         </div>
     )
 }
+
+export default Update

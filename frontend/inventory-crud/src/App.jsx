@@ -1,7 +1,7 @@
 import { Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import Add from './pages/Add'
-import Add from './pages/Update'
+import Update from './pages/Update'
 import{ ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
