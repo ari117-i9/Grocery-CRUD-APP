@@ -17,6 +17,7 @@ const Home = () => {
             setIsLoading(false)
         } catch (error) {
             console.error("Failed to fetch inventory:", error)
+            setIsLoading(false)
         }
     }
     useEffect(() =>{
